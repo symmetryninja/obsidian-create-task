@@ -104,7 +104,7 @@ export const CustomNote = ({
 
         <div>
           <label id={notePathId} className="create-task__custom-note-row-label">
-            Tag (optional)
+            Tags (optional)
           </label>
 
           <input

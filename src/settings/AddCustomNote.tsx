@@ -118,7 +118,7 @@ export const AddCustomNote = ({ className }: Props) => {
             htmlFor={tagId}
             className="create-task__add-custom-note-column-label"
           >
-            Tag (optional)
+            Tags (optional)
           </label>
 
           <input type="text" id={tagId} defaultValue="" {...register("tag")} />

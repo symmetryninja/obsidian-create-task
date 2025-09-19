@@ -200,18 +200,18 @@ export default class CreateTask extends Plugin {
   ) {
     let str = `- [ ]`;
 
-    if (taskDescription) {
-      str += ` ${taskDescription}`;
-    } else {
-      str += ` My task`;
-    }
-
     if (tag) {
       // Split tags by space and add # to each
       const tags = tag.split(/\s+/).filter(Boolean);
       if (tags.length > 0) {
         str += ` #${tags.join(" #")}`;
       }
+    }
+
+    if (taskDescription) {
+      str += ` ${taskDescription}`;
+    } else {
+      str += ` My task`;
     }
 
     if (dueDate) {

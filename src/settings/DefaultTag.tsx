@@ -35,7 +35,7 @@ export const DefaultTag = ({ className }: Props) => {
       <div className="setting-item">
         <div className="setting-item-info">
           <label htmlFor={id} className="setting-item-name">
-            Default tag
+            Default tags
           </label>
 
           <div className="setting-item-description">

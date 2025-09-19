@@ -16,7 +16,7 @@ export const CustomNotes = ({ className }: Props) => {
       <div className="create-task__custom-notes-column-labels">
         <div>Note path</div>
         <div>Display name</div>
-        <div>Tag (optional)</div>
+        <div>Tags (optional)</div>
       </div>
 
       {customNotes.map((customNote, index) => (
