@@ -1,12 +1,13 @@
 import { App, PluginSettingTab } from "obsidian";
 import { createElement } from "react";
-import { createRoot, Root } from "react-dom/client";
+import { Root, createRoot } from "react-dom/client";
 import CreateTask from "../main";
 import { ReactApp } from "./ReactApp";
 import { CreateTaskSettings } from "./types";
 
 export const DEFAULT_SETTINGS: CreateTaskSettings = {
   defaultNote: "",
+  defaultTag: "",
   dateFormat: "@due(YYYY-MM-DD)",
   customNotes: [],
 };

@@ -10,6 +10,7 @@ import { Preview } from "./Preview";
 export type Inputs = {
   customNoteIndex: "default" | string;
   taskDescription: string;
+  tags: string;
   taskDetails: string;
   dueDate: string;
 };
@@ -25,6 +26,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
     defaultValues: {
       customNoteIndex: "default",
       taskDescription: initialValues?.taskDescription || "",
+      tags: "",
       taskDetails: initialValues?.taskDetails || "",
       dueDate: initialValues?.dueDate || "",
     },
@@ -32,11 +34,13 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
 
   const customNoteIndex = methods.watch("customNoteIndex");
   const taskDescription = methods.watch("taskDescription");
+  const tags = methods.watch("tags");
   const taskDetails = methods.watch("taskDetails");
   const dueDate = methods.watch("dueDate");
 
   const targetNoteId = useId();
   const taskDescriptionId = useId();
+  const tagsId = useId();
   const taskDetailsId = useId();
 
   const createAnotherOneRef = useRef<HTMLButtonElement>(null);
@@ -51,6 +55,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
       data.taskDescription,
       data.dueDate,
       data.taskDetails,
+      data.tags,
     );
 
     createModal.close();
@@ -66,9 +71,11 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
       taskDescription,
       dueDate,
       taskDetails,
+      tags,
     );
 
     methods.setValue("taskDescription", "");
+    methods.setValue("tags", "");
     methods.setValue("taskDetails", "");
     methods.setValue("dueDate", "");
 
@@ -154,6 +161,29 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
                       This field is required.
                     </p>
                   )}
+                </div>
+              </div>
+
+              <div className="create-task__create-modal-row">
+                <div className="create-task__create-modal-left">
+                  <div className="create-task__create-modal-icon">🏷️</div>
+
+                  <div>
+                    <label htmlFor={tagsId}>Tags</label>
+
+                    <p className="create-task__info">
+                      Optional. Tags to add to this task (without # symbol)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="create-task__create-modal-right">
+                  <input
+                    type="text"
+                    {...methods.register("tags")}
+                    placeholder="e.g., urgent, work"
+                    id={tagsId}
+                  />
                 </div>
               </div>
 

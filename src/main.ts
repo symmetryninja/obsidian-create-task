@@ -132,6 +132,7 @@ export default class CreateTask extends Plugin {
     taskDescription: string,
     dueDate: string,
     taskDetails: string,
+    tags?: string,
   ) {
     let path: string;
     let str: string;
@@ -139,23 +140,39 @@ export default class CreateTask extends Plugin {
     if (customNoteIndexOrNotePath === "default") {
       path = this.settings.defaultNote;
 
+      // Merge default tag with user-provided tags
+      const allTags = [this.settings.defaultTag, tags]
+        .filter(Boolean)
+        .join(" ");
+
       str =
-        this.compileLine(undefined, taskDescription, dueDate, taskDetails) +
-        "\n";
+        this.compileLine(
+          allTags || undefined,
+          taskDescription,
+          dueDate,
+          taskDetails,
+        ) + "\n";
     } else if (typeof customNoteIndexOrNotePath === "string") {
       path = customNoteIndexOrNotePath;
 
       str =
-        this.compileLine(undefined, taskDescription, dueDate, taskDetails) +
-        "\n";
+        this.compileLine(
+          tags || undefined,
+          taskDescription,
+          dueDate,
+          taskDetails,
+        ) + "\n";
     } else {
       const customNote = this.settings.customNotes[customNoteIndexOrNotePath];
 
       path = customNote.path;
 
+      // Merge custom note tag with user-provided tags
+      const allTags = [customNote.tag, tags].filter(Boolean).join(" ");
+
       str =
         this.compileLine(
-          customNote.tag,
+          allTags || undefined,
           taskDescription,
           dueDate,
           taskDetails,
@@ -190,7 +207,11 @@ export default class CreateTask extends Plugin {
     }
 
     if (tag) {
-      str += ` #${tag}`;
+      // Split tags by space and add # to each
+      const tags = tag.split(/\s+/).filter(Boolean);
+      if (tags.length > 0) {
+        str += ` #${tags.join(" #")}`;
+      }
     }
 
     if (dueDate) {
@@ -200,7 +221,9 @@ export default class CreateTask extends Plugin {
 
       if (parsedDate) {
         const format = this.settings.dateFormat || "@due(YYYY-MM-DD)";
-        const dateString = `${parsedDate.getFullYear()}-${(parsedDate.getMonth() + 1).toString().padStart(2, "0")}-${parsedDate.getDate().toString().padStart(2, "0")}`;
+        const month = (parsedDate.getMonth() + 1).toString();
+        const day = parsedDate.getDate().toString();
+        const dateString = `${parsedDate.getFullYear()}-${month.length === 1 ? "0" + month : month}-${day.length === 1 ? "0" + day : day}`;
         str += ` ${format.replace("YYYY-MM-DD", dateString)}`;
       }
     }

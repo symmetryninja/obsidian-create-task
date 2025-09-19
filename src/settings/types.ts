@@ -6,6 +6,7 @@ export type CustomNote = {
 
 export type CreateTaskSettings = {
   defaultNote: string;
+  defaultTag?: string;
   dateFormat: string;
   customNotes: CustomNote[];
   firstOnboarding?: Date;

@@ -5,6 +5,7 @@ import { AddCustomNote } from "./AddCustomNote";
 import { CustomNotes } from "./CustomNotes";
 import { DateFormat } from "./DateFormat";
 import { DefaultNote } from "./DefaultNote";
+import { DefaultTag } from "./DefaultTag";
 import { DisableChangelog } from "./DisableChangelog";
 import { ObsidianProvider } from "./ObsidianContext";
 
@@ -17,6 +18,7 @@ export const ReactApp = ({ plugin }: Props) => {
     <StrictMode>
       <ObsidianProvider plugin={plugin}>
         <DefaultNote />
+        <DefaultTag />
         <DateFormat />
         <DisableChangelog />
         <AddCustomNote />
