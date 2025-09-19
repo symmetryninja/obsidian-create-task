@@ -231,6 +231,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
             customNoteIndex={customNoteIndex}
             notePath={initialValues?.notePath}
             taskDescription={taskDescription}
+            tags={tags}
             taskDetails={taskDetails}
             dueDate={dueDate}
           />

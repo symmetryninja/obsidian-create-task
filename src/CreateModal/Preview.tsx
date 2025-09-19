@@ -6,6 +6,7 @@ type Props = Readonly<{
   notePath?: string;
   customNoteIndex: "default" | string;
   taskDescription: string;
+  tags: string;
   taskDetails: string;
   dueDate: string;
 }>;
@@ -15,6 +16,7 @@ export const Preview = ({
   notePath,
   customNoteIndex,
   taskDescription,
+  tags,
   taskDetails,
   dueDate,
 }: Props) => {
@@ -25,15 +27,35 @@ export const Preview = ({
 
   if (notePath) {
     to = notePath;
-    task = plugin.compileLine(undefined, taskDescription, dueDate, taskDetails);
+    task = plugin.compileLine(
+      tags || undefined,
+      taskDescription,
+      dueDate,
+      taskDetails,
+    );
   } else if (customNoteIndex === "default") {
     to = plugin.settings.defaultNote;
-    task = plugin.compileLine(undefined, taskDescription, dueDate, taskDetails);
+
+    // Merge default tag with user-provided tags (same logic as in main.ts)
+    const allTags = [plugin.settings.defaultTag, tags]
+      .filter(Boolean)
+      .join(" ");
+
+    task = plugin.compileLine(
+      allTags || undefined,
+      taskDescription,
+      dueDate,
+      taskDetails,
+    );
   } else {
     const customNote = plugin.settings.customNotes[parseInt(customNoteIndex)];
     to = customNote.path;
+
+    // Merge custom note tag with user-provided tags (same logic as in main.ts)
+    const allTags = [customNote.tag, tags].filter(Boolean).join(" ");
+
     task = plugin.compileLine(
-      customNote.tag,
+      allTags || undefined,
       taskDescription,
       dueDate,
       taskDetails,
