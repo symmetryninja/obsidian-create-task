@@ -28,7 +28,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
       taskDescription: initialValues?.taskDescription || "",
       tags: "",
       taskDetails: initialValues?.taskDetails || "",
-      dueDate: initialValues?.dueDate || "",
+      dueDate: initialValues?.dueDate || "Today",
     },
   });
 
