@@ -77,7 +77,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
     methods.setValue("taskDescription", "");
     methods.setValue("tags", "");
     methods.setValue("taskDetails", "");
-    methods.setValue("dueDate", "");
+    // methods.setValue("dueDate", "Today");
 
     methods.setFocus("taskDescription");
   };
