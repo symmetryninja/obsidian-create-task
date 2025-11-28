@@ -214,6 +214,13 @@ export default class CreateTask extends Plugin {
       str += ` My task`;
     }
 
+    // Add created date
+    const now = new Date();
+    const createdMonth = (now.getMonth() + 1).toString();
+    const createdDay = now.getDate().toString();
+    const createdDateString = `${now.getFullYear()}-${createdMonth.length === 1 ? "0" + createdMonth : createdMonth}-${createdDay.length === 1 ? "0" + createdDay : createdDay}`;
+    str += ` ➕ ${createdDateString}`;
+
     if (dueDate) {
       const parsedDate = parseDate(dueDate, undefined, {
         forwardDate: true,
