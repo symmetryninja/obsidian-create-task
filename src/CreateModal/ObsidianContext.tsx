@@ -5,7 +5,7 @@ import { CreateTaskCreateModal } from ".";
 
 type ObsidianContextInterface = {
   plugin: CreateTask;
-  createModal: CreateTaskCreateModal;
+  createModal?: CreateTaskCreateModal;
 };
 
 const ObsidianContext = createContext<ObsidianContextInterface | undefined>(
@@ -15,7 +15,7 @@ const ObsidianContext = createContext<ObsidianContextInterface | undefined>(
 type ProviderProps = Readonly<{
   children: ReactNode;
   plugin: CreateTask;
-  createModal: CreateTaskCreateModal;
+  createModal?: CreateTaskCreateModal;
 }>;
 
 export const ObsidianProvider = ({

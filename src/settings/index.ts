@@ -10,6 +10,7 @@ export const DEFAULT_SETTINGS: CreateTaskSettings = {
   defaultTag: "",
   dateFormat: "@due(YYYY-MM-DD)",
   customNotes: [],
+  hideDetailsField: false,
 };
 
 export class CreateTaskSettingTab extends PluginSettingTab {

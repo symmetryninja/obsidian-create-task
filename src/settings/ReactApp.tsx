@@ -7,6 +7,7 @@ import { DateFormat } from "./DateFormat";
 import { DefaultNote } from "./DefaultNote";
 import { DefaultTag } from "./DefaultTag";
 import { DisableChangelog } from "./DisableChangelog";
+import { HideDetailsField } from "./HideDetailsField";
 import { ObsidianProvider } from "./ObsidianContext";
 
 type Props = Readonly<{
@@ -20,6 +21,7 @@ export const ReactApp = ({ plugin }: Props) => {
         <DefaultNote />
         <DefaultTag />
         <DateFormat />
+        <HideDetailsField />
         <DisableChangelog />
         <AddCustomNote />
         <CustomNotes />

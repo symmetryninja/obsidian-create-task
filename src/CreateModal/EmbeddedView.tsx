@@ -1,34 +1,23 @@
 import { StrictMode, useId, useRef } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import CreateTask from "src/main";
-import { CreateTaskCreateModal, InitialValues } from ".";
 import { Date } from "./Date";
-import { Heading } from "./Heading";
 import { ObsidianProvider } from "./ObsidianContext";
 import { Preview } from "./Preview";
-
-export type Inputs = {
-  customNoteIndex: "default" | string;
-  taskDescription: string;
-  tags: string;
-  taskDetails: string;
-  dueDate: string;
-};
+import { Inputs } from "./ReactApp";
 
 type Props = Readonly<{
   plugin: CreateTask;
-  createModal: CreateTaskCreateModal;
-  initialValues: InitialValues;
 }>;
 
-export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
+export const EmbeddedView = ({ plugin }: Props) => {
   const methods = useForm<Inputs>({
     defaultValues: {
       customNoteIndex: "default",
-      taskDescription: initialValues?.taskDescription || "",
+      taskDescription: "",
       tags: "",
-      taskDetails: initialValues?.taskDetails || "",
-      dueDate: initialValues?.dueDate || "Today",
+      taskDetails: "",
+      dueDate: "Today",
     },
   });
 
@@ -47,27 +36,25 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await plugin.createTask(
-      initialValues?.notePath
-        ? initialValues.notePath
-        : data.customNoteIndex === "default"
-          ? "default"
-          : parseInt(data.customNoteIndex),
+      data.customNoteIndex === "default"
+        ? "default"
+        : parseInt(data.customNoteIndex),
       data.taskDescription,
       data.dueDate,
       data.taskDetails,
       data.tags,
     );
 
-    createModal.close();
+    // Reset form after submission
+    methods.setValue("taskDescription", "");
+    methods.setValue("tags", "");
+    methods.setValue("taskDetails", "");
+    methods.setFocus("taskDescription");
   };
 
   const handleCreateAnotherOne = async () => {
     await plugin.createTask(
-      initialValues?.notePath
-        ? initialValues.notePath
-        : customNoteIndex === "default"
-          ? "default"
-          : parseInt(customNoteIndex),
+      customNoteIndex === "default" ? "default" : parseInt(customNoteIndex),
       taskDescription,
       dueDate,
       taskDetails,
@@ -77,7 +64,6 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
     methods.setValue("taskDescription", "");
     methods.setValue("tags", "");
     methods.setValue("taskDetails", "");
-    // methods.setValue("dueDate", "Today");
 
     methods.setFocus("taskDescription");
   };
@@ -90,10 +76,8 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
 
   return (
     <StrictMode>
-      <ObsidianProvider plugin={plugin} createModal={createModal}>
-        <div className="create-task__create-modal">
-          <Heading />
-
+      <ObsidianProvider plugin={plugin}>
+        <div className="create-task__create-modal create-task__embedded-view">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="create-task__create-modal-row">
@@ -112,27 +96,17 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
                 </div>
 
                 <div className="create-task__create-modal-right">
-                  {initialValues?.notePath ? (
-                    <input
-                      type="text"
-                      disabled
-                      autoFocus
-                      defaultValue={initialValues?.notePath}
-                      id={targetNoteId}
-                    />
-                  ) : (
-                    <select
-                      className="dropdown"
-                      autoFocus
-                      {...methods.register("customNoteIndex", {
-                        required: true,
-                      })}
-                      id={targetNoteId}
-                    >
-                      <option value="default">Default</option>
-                      {options}
-                    </select>
-                  )}
+                  <select
+                    className="dropdown"
+                    autoFocus
+                    {...methods.register("customNoteIndex", {
+                      required: true,
+                    })}
+                    id={targetNoteId}
+                  >
+                    <option value="default">Default</option>
+                    {options}
+                  </select>
                 </div>
               </div>
 
@@ -238,7 +212,6 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
 
           <Preview
             customNoteIndex={customNoteIndex}
-            notePath={initialValues?.notePath}
             taskDescription={taskDescription}
             tags={tags}
             taskDetails={taskDetails}

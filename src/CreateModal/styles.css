@@ -4,6 +4,29 @@
   container-type: inline-size;
 }
 
+.create-task__label-with-tooltip {
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--text-muted);
+  text-underline-offset: 2px;
+}
+
+.create-task__embedded-view {
+  padding: var(--size-4-4);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background-color: var(--background-primary);
+  max-height: none;
+  height: auto;
+  overflow: visible;
+}
+
+.create-task__embedded-view h2:last-of-type,
+.create-task__embedded-view > div:last-child,
+.create-task__embedded-view pre:last-child {
+  margin-bottom: 0;
+}
+
 .create-task__create-modal-heading {
   display: flex;
   justify-content: space-between;

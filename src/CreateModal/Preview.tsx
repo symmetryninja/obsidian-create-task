@@ -64,12 +64,9 @@ export const Preview = ({
 
   return (
     <div className={clsx(className)}>
-      <h2>Preview</h2>
-
-      <p className="create-task__info">
-        The following line will get added to: <i>{to}</i>
-      </p>
-
+      <h2>
+        Preview (<i>{to}</i>){" "}
+      </h2>
       <pre>
         <code className="create-task__preview">{task}</code>
       </pre>

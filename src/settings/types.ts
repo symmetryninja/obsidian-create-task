@@ -12,4 +12,5 @@ export type CreateTaskSettings = {
   firstOnboarding?: Date;
   disableChangelog?: boolean;
   lastChangelog?: string;
+  hideDetailsField?: boolean;
 };

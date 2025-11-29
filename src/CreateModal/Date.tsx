@@ -100,11 +100,13 @@ export const Date = ({ nextFocusRef }: Props) => {
         <div className="create-task__create-modal-icon">📅</div>
 
         <div>
-          <label htmlFor={id}>Due date</label>
-
-          <p className="create-task__info">
-            Optional. You can use natural language like "next week"
-          </p>
+          <label
+            htmlFor={id}
+            title='Optional. You can use natural language like "next week"'
+            className="create-task__label-with-tooltip"
+          >
+            Due date
+          </label>
         </div>
       </div>
 

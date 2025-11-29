@@ -16,7 +16,7 @@ export const Heading = ({ className }: Props) => {
       <button
         type="button"
         onClick={() => {
-          createModal.close();
+          createModal?.close();
           plugin.openSettings();
         }}
       >

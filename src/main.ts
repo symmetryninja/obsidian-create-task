@@ -1,8 +1,11 @@
 import { parseDate } from "chrono-node";
-import { Notice, Plugin, TFile } from "obsidian";
+import { MarkdownRenderChild, Notice, Plugin, TFile } from "obsidian";
+import { createElement } from "react";
+import { Root, createRoot } from "react-dom/client";
 import { gte } from "semver";
 import { CreateTaskChangelogModal } from "./ChangelogModal";
 import { CreateTaskCreateModal } from "./CreateModal";
+import { EmbeddedView } from "./CreateModal/EmbeddedView";
 import { CreateTaskOnboardingModal } from "./OnboardingModal";
 import { CreateTaskSettingTab, DEFAULT_SETTINGS } from "./settings";
 import { CreateTaskSettings } from "./settings/types";
@@ -50,6 +53,30 @@ export default class CreateTask extends Plugin {
     });
 
     this.addSettingTab(new CreateTaskSettingTab(this.app, this));
+
+    // Register code block processor for embedded view
+    this.registerMarkdownCodeBlockProcessor(
+      "create-task",
+      (source, el, ctx) => {
+        const reactRoot = el.createDiv();
+        const root = createRoot(reactRoot);
+        root.render(createElement(EmbeddedView, { plugin: this }));
+
+        // Store root for cleanup
+        ctx.addChild(
+          new (class extends MarkdownRenderChild {
+            root: Root;
+            constructor(containerEl: HTMLElement, root: Root) {
+              super(containerEl);
+              this.root = root;
+            }
+            onunload() {
+              this.root.unmount();
+            }
+          })(reactRoot, root),
+        );
+      },
+    );
 
     this.registerObsidianProtocolHandler("create-task", (params) => {
       if (

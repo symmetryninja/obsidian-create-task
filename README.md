@@ -101,6 +101,31 @@ Here are some examples of where you could use the url:
 
 <img src="https://github.com/simonknittel/obsidian-create-task/blob/main/docs/google-chome-bookmark.png?raw=true" height="240" />
 
+### Embedded view
+
+You can embed the task creation form directly into any markdown note using a code block:
+
+````markdown
+```create-task
+
+```
+````
+
+This will render the full task creation form inline within your note, allowing you to create tasks without opening a modal. The embedded form includes all the same features as the modal:
+
+- Target note selection
+- Task description
+- Tags
+- Details
+- Due date with natural language support
+- Live preview of the task that will be created
+
+This is particularly useful for:
+
+- Creating a dedicated "Task Inbox" page
+- Embedding task creation in project notes
+- Quick access to task creation in your daily notes
+
 #### Android
 
 You can use _Automate_ to create a homescreen shortcut which opens the create modal.
