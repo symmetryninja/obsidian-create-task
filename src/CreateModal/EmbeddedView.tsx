@@ -32,7 +32,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
   const tagsId = useId();
   const taskDetailsId = useId();
 
-  const createAnotherOneRef = useRef<HTMLButtonElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await plugin.createTask(
@@ -49,22 +49,6 @@ export const EmbeddedView = ({ plugin }: Props) => {
     methods.setValue("taskDescription", "");
     methods.setValue("tags", "");
     methods.setValue("taskDetails", "");
-    methods.setFocus("taskDescription");
-  };
-
-  const handleCreateAnotherOne = async () => {
-    await plugin.createTask(
-      customNoteIndex === "default" ? "default" : parseInt(customNoteIndex),
-      taskDescription,
-      dueDate,
-      taskDetails,
-      tags,
-    );
-
-    methods.setValue("taskDescription", "");
-    methods.setValue("tags", "");
-    methods.setValue("taskDetails", "");
-
     methods.setFocus("taskDescription");
   };
 
@@ -192,18 +176,10 @@ export const EmbeddedView = ({ plugin }: Props) => {
                 </div>
               )}
 
-              <Date nextFocusRef={createAnotherOneRef} />
+              <Date nextFocusRef={submitButtonRef} />
 
               <div className="create-task__create-modal-actions">
-                <button
-                  type="button"
-                  onClick={handleCreateAnotherOne}
-                  ref={createAnotherOneRef}
-                >
-                  Create another one
-                </button>
-
-                <button type="submit" className="mod-cta">
+                <button type="submit" className="mod-cta" ref={submitButtonRef}>
                   Create
                 </button>
               </div>
