@@ -70,13 +70,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
                   <div className="create-task__create-modal-icon">📁</div>
 
                   <div>
-                    <label
-                      htmlFor={targetNoteId}
-                      title="Required. Corresponds to the custom notes added in the settings"
-                      className="create-task__label-with-tooltip"
-                    >
-                      Target note
-                    </label>
+                    <label htmlFor={targetNoteId}>Target note</label>
                   </div>
                 </div>
 
@@ -100,13 +94,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
                   <div className="create-task__create-modal-icon">🖊️</div>
 
                   <div>
-                    <label
-                      htmlFor={taskDescriptionId}
-                      title="Required. Text of the task"
-                      className="create-task__label-with-tooltip"
-                    >
-                      Task description
-                    </label>
+                    <label htmlFor={taskDescriptionId}>Task description</label>
                   </div>
                 </div>
 
@@ -131,13 +119,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
                   <div className="create-task__create-modal-icon">🏷️</div>
 
                   <div>
-                    <label
-                      htmlFor={tagsId}
-                      title="Optional. Tags to add to this task (without # symbol)"
-                      className="create-task__label-with-tooltip"
-                    >
-                      Tags
-                    </label>
+                    <label htmlFor={tagsId}>Tags</label>
                   </div>
                 </div>
 
@@ -152,13 +134,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
                     <div className="create-task__create-modal-icon">🖊️</div>
 
                     <div>
-                      <label
-                        htmlFor={taskDetailsId}
-                        title="Optional. More details for this task"
-                        className="create-task__label-with-tooltip"
-                      >
-                        Details
-                      </label>
+                      <label htmlFor={taskDetailsId}>Details</label>
                     </div>
                   </div>
 
