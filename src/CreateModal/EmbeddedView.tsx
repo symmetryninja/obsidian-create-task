@@ -5,6 +5,7 @@ import { Date } from "./Date";
 import { ObsidianProvider } from "./ObsidianContext";
 import { Preview } from "./Preview";
 import { Inputs } from "./ReactApp";
+import { TagInput } from "./TagInput";
 
 type Props = Readonly<{
   plugin: CreateTask;
@@ -141,12 +142,7 @@ export const EmbeddedView = ({ plugin }: Props) => {
                 </div>
 
                 <div className="create-task__create-modal-right">
-                  <input
-                    type="text"
-                    {...methods.register("tags")}
-                    placeholder="e.g., urgent, work"
-                    id={tagsId}
-                  />
+                  <TagInput id={tagsId} placeholder="e.g., urgent, work" />
                 </div>
               </div>
 

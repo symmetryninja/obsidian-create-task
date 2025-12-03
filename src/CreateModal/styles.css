@@ -151,3 +151,34 @@
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
+
+.create-task__tag-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: var(--size-4-1);
+  background-color: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-s);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.create-task__tag-suggestion {
+  padding: var(--size-4-2) var(--size-4-3);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.create-task__tag-suggestion:hover,
+.create-task__tag-suggestion--selected {
+  background-color: var(--background-modifier-hover);
+}
+
+.create-task__tag-suggestion-text {
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+}

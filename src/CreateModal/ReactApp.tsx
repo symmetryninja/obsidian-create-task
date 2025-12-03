@@ -6,6 +6,7 @@ import { Date } from "./Date";
 import { Heading } from "./Heading";
 import { ObsidianProvider } from "./ObsidianContext";
 import { Preview } from "./Preview";
+import { TagInput } from "./TagInput";
 
 export type Inputs = {
   customNoteIndex: "default" | string;
@@ -183,12 +184,7 @@ export const ReactApp = ({ plugin, createModal, initialValues }: Props) => {
                 </div>
 
                 <div className="create-task__create-modal-right">
-                  <input
-                    type="text"
-                    {...methods.register("tags")}
-                    placeholder="e.g., urgent, work"
-                    id={tagsId}
-                  />
+                  <TagInput id={tagsId} placeholder="e.g., urgent, work" />
                 </div>
               </div>
 
